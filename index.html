@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="clock-container">
+                <div id="clock" class="clock"></div>
+                <div id="date" class="date"></div>
+            </div>
+            
+            <div class="folders-container">
+                <h2><span class="icon">📁</span> Folders</h2>
+                <ul id="folders-list" class="folders-list">
+                    <li data-folder="today" class="active">Today</li>
+                    <li data-folder="upcoming">Upcoming</li>
+                    <li data-folder="all">All Tasks</li>
+                </ul>
+                <button id="add-folder-btn" class="btn btn-outline">Add Folder</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="tabs">
+                <button data-tab="list" class="tab-btn active">📋 List View</button>
+                <button data-tab="calendar" class="tab-btn">📅 Calendar</button>
+                <button data-tab="sync" class="tab-btn">🔄 Google Sync</button>
+            </div>
+
+            <!-- List View Tab -->
+            <div id="list-view" class="tab-content active">
+                <form id="task-form" class="task-form">
+                    <h2 id="form-title">Add New Task</h2>
+                    
+                    <div class="form-group">
+                        <label for="task-title">Task Title</label>
+                        <input type="text" id="task-title" placeholder="Enter task title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="task-notes">Notes</label>
+                        <textarea id="task-notes" placeholder="Add notes (optional)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Voice Message</label>
+                        <div class="voice-recorder">
+                            <button type="button" id="record-btn" class="btn btn-outline">
+                                🎤 Record Voice
+                            </button>
+                            <div id="recording-status" class="recording-status"></div>
+                            <div id="audio-preview" class="audio-preview" style="display: none;">
+                                <audio id="audio-player" controls></audio>
+                                <button type="button" id="delete-recording-btn" class="btn btn-outline">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-due-date">Due Date</label>
+                            <input type="datetime-local" id="task-due-date">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="task-folder">Folder</label>
+                            <select id="task-folder">
+                                <option value="today">Today</option>
+                                <option value="upcoming">Upcoming</option>
+                                <option value="all" selected>All Tasks</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="task-notify">Notification (minutes before due)</label>
+                        <select id="task-notify">
+                            <option value="5">5 minutes</option>
+                            <option value="15">15 minutes</option>
+                            <option value="30" selected>30 minutes</option>
+                            <option value="60">1 hour</option>
+                            <option value="1440">1 day</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="cancel-btn" class="btn btn-outline" style="display: none;">Cancel</button>
+                        <button type="submit" id="submit-btn" class="btn btn-primary">Add Task</button>
+                    </div>
+                </form>
+
+                <div id="tasks-container" class="tasks-container"></div>
+            </div>
+
+            <!-- Calendar View Tab -->
+            <div id="calendar-view" class="tab-content">
+                <div class="calendar-header">
+                    <button id="prev-month" class="btn btn-icon">◀</button>
+                    <h2 id="calendar-title">Month Year</h2>
+                    <button id="next-month" class="btn btn-icon">▶</button>
+                </div>
+                <div class="calendar-grid">
+                    <div class="calendar-day-header">Sun</div>
+                    <div class="calendar-day-header">Mon</div>
+                    <div class="calendar-day-header">Tue</div>
+                    <div class="calendar-day-header">Wed</div>
+                    <div class="calendar-day-header">Thu</div>
+                    <div class="calendar-day-header">Fri</div>
+                    <div class="calendar-day-header">Sat</div>
+                    <div id="calendar-days" class="calendar-days"></div>
+                </div>
+            </div>
+
+            <!-- Google Sync Tab -->
+            <div id="sync-view" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>📅 Google Calendar Integration</h2>
+                        <p>Sync your tasks with Google Calendar to keep everything in one place</p>
+                    </div>
+                    <div class="card-content" id="sync-content">
+                        <div class="text-center">
+                            <p class="mb-4">Connect your Google Calendar to sync your tasks</p>
+                            <button id="connect-google-btn" class="btn btn-primary">Connect Google Calendar</button>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <p class="text-small">
+                            Note: To use this feature in a real application, you would need to register your app with Google and implement OAuth 2.0 authentication.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
